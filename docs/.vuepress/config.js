@@ -33,7 +33,7 @@ module.exports = {
         "/": {
             lang: "zh-CN",
             title: "小傅哥 bugstack 虫洞栈",
-            description: "包含: Java 基础，面经手册，Netty4.x，手写MyBatis，用Java实现JVM，重学Java设计模式，SpringBoot中间件开发，IDEA插件开发，大营销抽奖系统，Java 实战项目训练，字节码编程..."
+            description: "包含: AI Agent、Java 基础，面经手册，Netty4.x，手写MyBatis，用Java实现JVM，重学Java设计模式，SpringBoot中间件开发，IDEA插件开发，大营销抽奖系统，Java 实战项目训练，字节码编程..."
         }
     },
     head: [
@@ -142,6 +142,8 @@ module.exports = {
         }],
         // see: https://github.com/tolking/vuepress-plugin-img-lazy
         ['img-lazy', {}],
+        // mermaid 图表渲染支持（本地插件：fence 转换 + 自定义组件修复源码截断问题）
+        [require('path').resolve(__dirname, 'plugins/mermaid-local'), {}],
         ["vuepress-plugin-tags", {
             type: 'default', // 标签预定义样式
             color: '#42b983',  // 标签字体颜色
@@ -188,7 +190,7 @@ module.exports = {
                         text: '编程路书', link: '/md/road-map/road-map.md'
                     },
                     {
-                        text: 'AI Agent', link: '/md/ai/spring-ai.md'
+                        text: '智能体', link: '/md/ai/introduction.md'
                     },
                     {
                         text: '算法',
@@ -208,46 +210,47 @@ module.exports = {
                         ]
                     },
                     {
-                        text: '开发技术',
+                        text: 'Java',
                         items: [
                             {
-                                text: 'Java',
-                                items: [
-                                    {
-                                        text: '面经手册',
-                                        link: '/md/java/interview/2020-07-28-面经手册 · 开篇《面试官都问我啥》.md'
-                                    },
-                                    {
-                                        text: '用Java实现JVM',
-                                        link: '/md/java/develop-jvm/2019-05-01-用Java实现JVM第一章《命令行工具》.md'
-                                    },
-                                    {
-                                        text: '基础技术',
-                                        link: '/md/java/core/2020-01-06-[源码分析]咋嘞？你的IDEA过期了吧！加个Jar包就破解了，为什么？.md'
-                                    }
-                                ]
+                                text: '面经手册',
+                                link: '/md/java/interview/2020-07-28-面经手册 · 开篇《面试官都问我啥》.md'
                             },
                             {
-                                text: 'Spring',
-                                items: [
-                                    {
-                                        text: 'Spring 手撸专栏',
-                                        link: '/md/spring/develop-spring/2021-05-16-第1章：开篇介绍，手写Spring能给你带来什么？.md'
-                                    },
-                                    {
-                                        text: 'MyBatis 手撸专栏',
-                                        link: '/md/spring/develop-mybatis/2022-03-20-第1章：开篇介绍，手写Mybatis能给你带来什么？.md'
-                                    },
-                                    {
-                                        text: 'Spring Cloud',
-                                        link: '/md/spring/spring-cloud/2019-10-31-Spring Cloud零《总有一偏概述告诉你SpringCloud是什么》.md'
-                                    },
-                                    {
-                                        text: '源码分析(Mybatis、Quartz)',
-                                        link: '/md/spring/source-code/2019-12-25-[源码分析]Mybatis接口没有实现类为什么可以执行增删改查.md'
-                                    }
-                                ]
+                                text: '用Java实现JVM',
+                                link: '/md/java/develop-jvm/2019-05-01-用Java实现JVM第一章《命令行工具》.md'
                             },
+                            {
+                                text: '基础技术',
+                                link: '/md/java/core/2020-01-06-[源码分析]咋嘞？你的IDEA过期了吧！加个Jar包就破解了，为什么？.md'
+                            }
+                        ]
+                    },
+                    {
+                        text: '源码解读',
+                        items: [
+                            {
+                                text: 'Spring 手撸专栏',
+                                link: '/md/spring/develop-spring/2021-05-16-第1章：开篇介绍，手写Spring能给你带来什么？.md'
+                            },
+                            {
+                                text: 'MyBatis 手撸专栏',
+                                link: '/md/spring/develop-mybatis/2022-03-20-第1章：开篇介绍，手写Mybatis能给你带来什么？.md'
+                            },
+                            {
+                                text: 'Spring Cloud',
+                                link: '/md/spring/spring-cloud/2019-10-31-Spring Cloud零《总有一偏概述告诉你SpringCloud是什么》.md'
+                            },
+                            {
+                                text: '源码分析(Mybatis、Quartz)',
+                                link: '/md/spring/source-code/2019-12-25-[源码分析]Mybatis接口没有实现类为什么可以执行增删改查.md'
+                            }
+                        ]
+                    },
+                    {
+                        text: '架构技术',
+                        items: [
+
                             {
                                 text: '面向对象',
                                 items: [
@@ -344,12 +347,28 @@ module.exports = {
                             {
                                 text: '创新类型（AI）', items: [
                                     {
-                                        text: 'AI Agent 脚手架 + 场景应用',
-                                        link: '/md/project/ai-agent-scaffold/ai-agent-scaffold.md'
+                                        text: 'AI Agent Guide 通识教程（前置课）',
+                                        link: 'https://ai-agent-guide.xiaofuge.cn/'
                                     },
                                     {
-                                        text: 'AI MCP Gateway 网关服务系统（更新中）',
+                                        text: 'Java + DDD，1:1 复刻 Deepseek Harness 项目（更新中）',
+                                        link: '/md/project/deepseek-harness-java/deepseek-harness-java.md'
+                                    },
+                                    {
+                                        text: 'WaLiCode - AI Coding 辅助编码（更新中）',
+                                        link: '/md/project/walicode/walicode.md'
+                                    },
+                                    {
+                                        text: 'WaLiSSH - AI Shell 智能终端',
+                                        link: '/md/project/walissh/walissh.md'
+                                    },
+                                    {
+                                        text: 'AI MCP Gateway 网关服务系统',
                                         link: '/md/project/ai-mcp-gateway/ai-mcp-gateway.md'
+                                    },
+                                    {
+                                        text: 'AI Agent 脚手架 + 场景应用',
+                                        link: '/md/project/ai-agent-scaffold/ai-agent-scaffold.md'
                                     },
                                     {
                                         text: 'AI Agent 拖拉拽 + 动态配置',
@@ -370,7 +389,24 @@ module.exports = {
                                     {
                                         text: 'OpenAI SDK 组件项目',
                                         link: 'https://bugstack.cn/md/zsxq/project/openai-sdk-java.html'
-                                    }
+                                    },
+                                ]
+                            },
+                            {
+                                text: '零编码区（VibeCoding）', items: [
+                                    {
+                                        text: 'AI 新范式（0编码），开发 + 运维（部署、压测、调优）',
+                                        link: '/md/project/ai-new-paradigm/ai-new-paradigm.md'
+                                    },
+                                    {
+                                        text: 'WaLiAPI - 开源 AI LLM LocalGateway 本地网关系统',
+                                        link: '/md/project/waliapi/waliapi.md'
+                                    },
+                                    {
+                                        text: 'WaLiOffice - word、ppt、excel、draw.io 在线办公系统',
+                                        link: '/md/project/walioffice/walioffice.md'
+                                    },
+
                                 ]
                             },
                             {
@@ -437,7 +473,7 @@ module.exports = {
                                 text: '自学类型', items: [
                                     {
                                         text: '场景案例',
-                                        link: '/md/project/ddd-scene-solution/alipay-sandbox.md'
+                                        link: '/md/project/chatbot-api/chatbot-api.md'
                                     },
                                     {
                                         text: '吉祥外卖',
@@ -458,6 +494,26 @@ module.exports = {
                     {
                         text: '📝产品',
                         items: [
+                            {
+                                text: 'AI 应用', items: [
+                                    {
+                                        text: '👨🏻‍💻WaLiCode，编码&运维软件',
+                                        link: 'https://walicode.xiaofuge.cn/'
+                                    },
+                                    {
+                                        text: '🔧WaLiAPI，LLM 网关（负载均衡）',
+                                        link: 'https://github.com/fuzhengwei/WaLiAPI/releases'
+                                    },
+                                    {
+                                        text: '‍💻WaLiOffice，轻办公服务（仿豆包）',
+                                        link: 'https://walicode.xiaofuge.cn/'
+                                    },
+                                    {
+                                        text: '🐴DSH Java Desktop，AI Buddy 产品',
+                                        link: 'https://walicode.xiaofuge.cn/'
+                                    },
+                                ]
+                            },
                             {
                                 text: '出版物', items: [
                                     {
@@ -502,14 +558,7 @@ module.exports = {
                                     },
                                 ]
                             },
-                            {
-                                text: 'AI IDE', items: [
-                                    {
-                                        text: '👨🏻‍💻WaLiCode，AI IDE Coding',
-                                        link: '/md/product/software/walicode.md'
-                                    },
-                                ]
-                            },
+
                         ]
                     },
                     {
@@ -569,7 +618,13 @@ module.exports = {
                     "/md/project/group-buy-market/": getBarGroupBuyMarket(),
                     "/md/project/ai-knowledge/": getBarAiRagKnowledge(),
                     "/md/project/ai-agent-scaffold/": getBarAIAgentScaffold(),
+                    "/md/project/walissh/": getBarWaLiSSH(),
+                    "/md/project/walicode/": getBarWaLiCode(),
+                    "/md/project/waliapi/": getBarWaLiAPI(),
+                    "/md/project/walioffice/": getBarWaLiOffice(),
+                    "/md/project/deepseek-harness-java/": getBarDeepseekHarnessJava(),
                     "/md/project/ai-mcp-gateway/": getBarAIMCPGateway(),
+                    "/md/project/ai-new-paradigm/": getBarAINewParadigm(),
                     "/md/project/local-task-message/": getBarLocalTaskMessage(),
                     "/md/project/": getBarDDDSceneSolution(),
                     "/md/zsxq/": getBarZSXQ(),
@@ -601,6 +656,19 @@ function genBarOther() {
 function genBarAI() {
     return [
         {
+            title: "理论",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "introduction.md",
+                "ai-agent-guide.md",
+                "ai-agent-guide-wx.md",
+                "ai-llm.md",
+                "toy-agent.md",
+                "toy-agent-coding.md",
+            ]
+        },
+        {
             title: "框架",
             collapsable: false,
             sidebarDepth: 0,
@@ -614,8 +682,8 @@ function genBarAI() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "agent-skill.md",
                 "a2a.md",
+                "agent-skill.md",
             ]
         },
         {
@@ -623,12 +691,13 @@ function genBarAI() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "draw.io.md",
+                "walicode.md",
+                "walibot.md",
                 "qclaw.md",
                 "openclaw.md",
                 "ai-ssh-opencode.md",
+                "draw.io.md",
                 "github-models.md",
-                "trae.md",
             ]
         },
     ]
@@ -1026,6 +1095,25 @@ function genBarJavaInterview() {
                 "2021-04-07-面经手册 · 第29篇《Spring IOC 特性有哪些，不会读不懂源码！》.md",
                 "2021-04-18-面经手册 · 第30篇《关于 Spring 中 getBean 的全流程源码解析》.md",
                 "2021-05-05-面经手册 · 第31篇《Spring Bean IOC、AOP 循环依赖解读》.md",
+            ]
+        },
+        {
+            title: "第 7 章 MyBatis",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "2026-05-26-面经手册 · 第32篇《MyBatis 从SQL注入到预编译深度解析》.md",
+                "2026-05-26-面经手册 · 第33篇《MyBatis 是什么？和 Hibernate 有啥区别？半自动 ORM 怎么理解？》.md",
+                "2026-05-26-面经手册 · 第34篇《MyBatis 工作原理是什么？从 SqlSessionFactory 到 SqlSession 全链路解析》.md",
+                "2026-05-26-面经手册 · 第35篇《Mapper 接口没有实现类，怎么执行的？动态代理源码解析》.md",
+                "2026-05-26-面经手册 · 第36篇《MyBatis 动态 SQL 怎么实现的？9个标签用法与 OGNL 解析原理》.md",
+                "2026-05-26-面经手册 · 第37篇《resultMap 和 resultType 有啥区别？字段名不一致怎么映射？》.md",
+                "2026-05-26-面经手册 · 第38篇《MyBatis 一对一、一对多怎么查？延迟加载原理和 N+1 问题怎么解？》.md",
+                "2026-05-26-面经手册 · 第39篇《MyBatis 缓存机制全解析：一级缓存、二级缓存、清理策略和 Redis 整合》.md",
+                "2026-05-26-面经手册 · 第40篇《MyBatis 分页怎么做？RowBounds 和 PageHelper 原理分析》.md",
+                "2026-05-26-面经手册 · 第41篇《MyBatis 插件怎么拦截 SQL？四大核心对象与 Interceptor 原理分析》.md",
+                "2026-05-26-面经手册 · 第42篇《MyBatis 批量插入有几种方式？自增主键怎么获取？多参数怎么传？》.md",
+                "2026-05-26-面经手册 · 第43篇《MyBatis 和 Spring 怎么整合？SqlSessionTemplate 和自动装配原理》.md",
             ]
         }
     ]
@@ -1878,8 +1966,9 @@ function getBarZSXQ() {
                 "introduce.md",
                 "material/guide.md",
                 // "material/student-learn-all.md",
-                "material/student-learn-line.md",
+                "material/student-learn-ai.md",
                 // "material/student-learn-recruit.md",
+                "material/student-learn-line.md",
                 "material/student-learn-advanced.md",
             ]
         },
@@ -1902,8 +1991,9 @@ function getBarZSXQ() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "project/ai-agent-scaffold.md",
+                "project/walissh.md",
                 "project/ai-mcp-gateway.md",
+                "project/ai-agent-scaffold.md",
                 "project/ai-knowledge.md",
                 "project/openai-code-review.md",
                 "project/chatgpt.md",
@@ -2343,6 +2433,7 @@ function getBarAIMCPGateway() {
                 "第2-2节：MCP代理调用.md",
                 "第2-3节：MCP通信协议.md",
                 "第2-4节：streamable协议应用案例.md",
+                "第2-5节：streamable协议应用分析.md",
             ]
         },
         {
@@ -2366,12 +2457,24 @@ function getBarAIMCPGateway() {
                 "第3-14节：解析Swagger标准OpenAPI协议.md",
                 "第3-15节：协议域-协议解析处理.md",
                 "第3-16节：协议域-协议存储处理.md",
-                "第3-17节：网关域-配置数据存储(CRUD).md",
+                "第3-17节：网关域-配置数据存储CRUD.md",
                 "第3-18节：管理端-API功能编排串联.md",
                 "第3-19节：管理端-API与UI对接.md",
                 "第3-20节：验证服务，LLM对接测试MCP接口.md",
                 "第3-21节：验证服务，LLM对接测试MCP界面.md",
-                "none.md",
+                "第3-22节：streamable-http-api，测试验证案例.md",
+                "第3-23节：调整case层结构设计，处理不同方式的mcp实现.md",
+                "第3-24节：通过case和domain，串联出Streamable协议.md",
+                "第3-25节：验证服务，LLM对接测试Streamable接口.md",
+                "第3-26节：分布式服务设计redis.md",
+            ]
+        },
+        {
+            title: "第4部分：项目部署",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "第4-1节：把网关部署到云服务器.md",
             ]
         },
         {
@@ -2380,8 +2483,38 @@ function getBarAIMCPGateway() {
             sidebarDepth: 0,
             children: [
                 "promotion/ai-mcp-gateway-stage-completion.md",
+                "promotion/ai-mcp-gateway-all-complete.md",
             ]
         },
+    ]
+}
+
+function getBarAINewParadigm() {
+    return [
+        {
+            title: "介绍",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "ai-new-paradigm.md",
+            ]
+        },
+        {
+            title: "课程",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "第1节：AI Shell 连接云服务器.md",
+                "第2节：Docker Portainer 环境安装与使用.md",
+                "第3节：MySQL 配置和使用.md",
+                "第4节：Redis 配置和使用验证.md",
+                "第5节：SpringBoot 应用开发.md",
+                "第6节：应用部署到云服务器.md",
+                "第7节：压测项目分析性能.md",
+                "第8节：Ollama 模型部署与验证.md",
+                "第9节：智能对话客服集成.md",
+            ]
+        }
     ]
 }
 
@@ -2408,6 +2541,302 @@ function getBarLocalTaskMessage() {
                 "第6节：切面拦截任务操作.md",
             ]
         }
+    ]
+}
+
+function getBarWaLiSSH() {
+    return [
+        {
+            title: "介绍",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "walissh.md",
+                "notes.md",
+                "part-0/学习指引.md",
+            ]
+        },
+        {
+            title: "1阶段 - 场景开发",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-1/第1-1节：初始化工程搭建.md",
+                "part-1/第1-2节：UI 界面设计与实现.md",
+                "part-1/第1-3节：ssh连接云服务器.md",
+                "part-1/第1-4节：ssh连接配置库表设计.md",
+                "part-1/第1-5节：连接SSH简单领域设计.md",
+                "part-1/第1-6节：UI接口对接SSH连接操作.md",
+                "part-1/第1-7节：SSH命令处理.md",
+            ]
+        },
+        {
+            title: "2阶段 - 智能对接",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-2/第2-1节：引入Tool，做最小MVP版本智能体.md",
+                "part-2/第2-2节：最小MVP版本，UI对接.md",
+                "part-2/第2-3节：ReAct Case 架构设计与实现.md",
+                "part-2/第2-4节：ReAct 动态 Prompt 上下文增强.md",
+                "part-2/第2-5节：ReAct Context 上下文管理.md",
+                "part-2/第2-6节：ReAct ADK Session 上下文治理与历史净化.md",
+                "part-2/第2-7节：ReAct 意图识别与反馈回路.md",
+                "part-2/第2-8节：ReAct 长期记忆和数据召回.md",
+                "part-2/第2-9节：缓存命中与推理使用.md",
+                "part-2/第2-10节：子Agent派发.md",
+                "part-2/第2-11节：UI 对接&迭代功能.md",
+            ]
+        }
+    ]
+}
+
+function getBarWaLiCode() {
+    return [
+        {
+            title: "介绍",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "walicode.md",
+            ]
+        },
+        {
+            title: "0阶段 - 系统设计",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-0/第0-1节：架构设计.md",
+            ]
+        },
+        {
+            title: "1阶段 - 库表设计",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-1/第1-1节：持久化，会话消息表.md",
+                "part-1/第1-2节：持久化，对话落库.md",
+                "part-1/第1-3节：持久化，里程碑与核心记忆.md",
+            ]
+        },
+        {
+            title: "2阶段 - 模型设置",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-2/第2-1节：模型配置，库表驱动的渠道管理.md",
+            ]
+        },
+    ]
+}
+
+function getBarWaLiAPI() {
+    return [
+        {
+            title: "介绍",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "waliapi.md",
+                "waliapi-llm-rag.md",
+                "waliapi-llm-wiki.md",
+                "waliapi-sub2api-ccswitch.md",
+                "part-0/第0-1节：学习指引.md",
+            ]
+        },
+        {
+            title: "1阶段 - 基础实现",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-1/第1-1节：初始化工程搭建.md",
+                "part-1/第1-2节：数据库设计与初始化.md",
+                "part-1/第1-3节：渠道适配器模式.md",
+                "part-1/第1-4节：多供应商协议适配.md",
+                "part-1/第1-5节：负载均衡调度器.md",
+                "part-1/第1-6节：API转发代理核心.md",
+                "part-1/第1-7节：HTTP服务器与SSE流式.md",
+            ]
+        },
+        {
+            title: "2阶段 - 综合扩展",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-2/第2-1节：密钥管理与配额控制.md",
+                "part-2/第2-2节：安全审计引擎.md",
+                "part-2/第2-3节：安全规则与数据脱敏.md",
+                "part-2/第2-4节：前端页面开发.md",
+                "part-2/第2-5节：设置中心与打包部署.md",
+            ]
+        },
+        {
+            title: "3阶段 - 知识库",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-3/第3-1节：多协议转换引擎.md",
+                "part-3/第3-2节：服务注册框架.md",
+                "part-3/第3-3节：知识库数据模型与文档解析.md",
+                "part-3/第3-4节：向量化与HNSW索引.md",
+                "part-3/第3-5节：知识库检索与RAG问答.md",
+                "part-3/第3-6节：MCP Server服务.md",
+                "part-3/第3-7节：前端增强与自动更新.md",
+                "part-3/第3-8节：混合检索调优与检索可视化.md",
+                "part-3/第3-9节：MCP工具扩展与仪表盘增强.md",
+            ]
+        },
+        {
+            title: "4阶段 - llm-wiki",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-4/第4-1节：Wiki数据模型与项目结构.md",
+                "part-4/第4-2节：Wiki文档摄入管道.md",
+                "part-4/第4-3节：Wiki页面管理与命令层.md",
+                "part-4/第4-4节：WikiMCP工具集成.md",
+                "part-4/第4-5节：Wiki前端页面.md",
+            ]
+        },
+        {
+            title: "扩展 - 场景应用",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "other/waliapi-codex.md",
+            ]
+        },
+    ]
+}
+
+function getBarWaLiOffice() {
+    return [
+        {
+            title: "介绍",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "walioffice.md",
+                "walioffice-dsh-plugin.md",
+                "part-0/第0-1节：学习指引.md",
+            ]
+        },
+        {
+            title: "1部分 - 需求与架构",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-1/第1-1节：WaLiOffice需求分析.md",
+                "part-1/第1-2节：技术栈选型与系统架构设计.md",
+            ]
+        },
+        {
+            title: "2部分 - 智能体对话基础",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-2/第2-1节：工程初始化与项目结构.md",
+                "part-2/第2-2节：LLM客户端与流式SSE实现.md",
+                "part-2/第2-3节：数据库设计与会话持久化.md",
+                "part-2/第2-4节：工具Trait定义与注册表机制.md",
+                "part-2/第2-5节：ReAct循环核心实现.md",
+                "part-2/第2-6节：System Prompt工程与意图识别.md",
+                "part-2/第2-7节：后端Chat路由与SSE端点.md",
+                "part-2/第2-8节：前端对话界面与流式渲染.md",
+            ]
+        },
+        {
+            title: "3部分 - 工具集成",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-3/第3-1节：Markdown工具——全链路模板打通.md",
+                "part-3/第3-2节：Word工具与纯Rust DOCX渲染.md",
+                "part-3/第3-3节：联网搜索工具 web_search.md",
+                "part-3/第3-4节：Excel工具与XLSX渲染.md",
+                "part-3/第3-5节：ECharts图表工具与前端渲染.md",
+                "part-3/第3-6节：react-drawio嵌入式编辑器.md",
+                "part-3/第3-7节：PPT 双工具协作.md",
+                "part-3/第3-8节：图像生成——API调用与多Key轮询.md",
+                "part-3/第3-9节：图像生成——附件理解与图生图.md",
+                "part-3/第3-10节：视频生成——Agnes Video API.md",
+                "part-3/第3-11节：视频生成——本地ffmpeg兜底机制.md",
+            ]
+        },
+        {
+            title: "4部分 - 增强设计",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-4/第4-1节：配置管理与多组LLM端点.md",
+                "part-4/第4-2节：附件处理与状态管理.md",
+                "part-4/第4-3节：用户认证与JWT.md",
+            ]
+        },
+        {
+            title: "5部分 - 部署与DevOps",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-5/第5-1节：Docker多阶段构建.md",
+                "part-5/第5-2节：云服务器部署配置.md",
+            ]
+        },
+        // {
+        //     title: "6部分 - DSH Agent引擎集成（预留）",
+        //     collapsable: false,
+        //     sidebarDepth: 0,
+        //     children: [
+        //         "part-6/第6-1节：DSH架构设计与混合引擎方案.md",
+        //         "part-6/第6-2节：DSH核心插件开发.md",
+        //         "part-6/第6-3节：walioffice-tools统一工具插件.md",
+        //         "part-6/第6-4节：cordis插件系统与BlockAssembler.md",
+        //         "part-6/第6-5节：Rust代理路由与工具回调.md",
+        //         "part-6/第6-6节：前端适配与DSH全链路验证.md",
+        //     ]
+        // },
+    ]
+}
+
+function getBarDeepseekHarnessJava() {
+    return [
+        {
+            title: "介绍",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "deepseek-harness-java.md",
+                "dsh-java-desktop.md",
+                "dsh-java-plugin.md",
+            ]
+        },
+        {
+            title: "0阶段 - 系统信息",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-0/第0-1节：架构设计.md",
+            ]
+        },
+        {
+            title: "1阶段 - 契约定义",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-1/第1-1节：契约定义-types，消息与工具.md",
+                "part-1/第1-2节：契约定义-types，插件SPI机制.md",
+                "part-1/第1-3节：契约定义-api，接口层定义.md",
+            ]
+        },
+        {
+            title: "2阶段 - 模型通信",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "part-2/第2-1节：LLM端口，最小DeepSeek适配器.md",
+                "part-2/第2-2节：最小对话HTTP入口.md",
+            ]
+        },
     ]
 }
 

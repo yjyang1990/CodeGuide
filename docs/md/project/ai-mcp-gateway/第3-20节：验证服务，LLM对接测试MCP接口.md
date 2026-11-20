@@ -1,6 +1,6 @@
 ---
 title: 【更】第3-20节：验证服务，LLM对接测试MCP接口
-pay: https://t.zsxq.com/nKjea
+pay: https://t.zsxq.com/0TXtB
 ---
 
 # 《AI MCP Gateway 网关服务系统》第3-20节：验证服务，LLM对接测试MCP接口
@@ -10,6 +10,8 @@ pay: https://t.zsxq.com/nKjea
 <br/>视频：[https://t.zsxq.com/VV1Bt](https://t.zsxq.com/VV1Bt)
 
 >沉淀、分享、成长，让自己和他人都能有所收获！😄
+
+大家好，我是技术UP主小傅哥。
 
 ## 一、本章诉求
 
